@@ -3,7 +3,7 @@ require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
 const ClientToken = process.env.BuySellToken;
-const ClientID = process.env.ByeSellId;
+const ClientID = process.env.BuySellId;
 const GuildID = process.env.ArabianPhunksId;
 
 module.exports = async () => {
