@@ -10,6 +10,7 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setTitle(`Server Name: ${server.name}`)
+      .setColor(server.displayHexColor)
       .setDescription(`Member count: ${server.memberCount}`)
       .setThumbnail(server.iconURL())
       .addFields(
