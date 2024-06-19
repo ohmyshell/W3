@@ -1,11 +1,10 @@
 const { REST, Routes } = require('discord.js');
-const {
-  ByeSellId,
-  ArabianPhunksId,
-  ByeSellToken,
-} = require('../../config.json');
+require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
+const ClientToken = process.env.ByeSellToken;
+const ClientID = process.env.ByeSellId;
+const GuildID = process.env.ArabianPhunksId;
 
 module.exports = async () => {
   const commandsArray = [];
@@ -33,7 +32,7 @@ module.exports = async () => {
     }
   }
 
-  const rest = new REST().setToken(ByeSellToken);
+  const rest = new REST().setToken(ClientToken);
 
   (async () => {
     try {
@@ -42,7 +41,7 @@ module.exports = async () => {
       );
 
       const data = await rest.put(
-        Routes.applicationGuildCommands(ByeSellId, ArabianPhunksId),
+        Routes.applicationGuildCommands(ClientID, GuildID),
         { body: commandsArray }
       );
 

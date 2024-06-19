@@ -1,4 +1,4 @@
-const { ByeSellToken } = require('./config.json');
+require('dotenv').config();
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const path = require('node:path');
 const callCommands = require('./src/functions/callCommands');
@@ -29,4 +29,5 @@ commandHandler(client);
 
 ready(client);
 
-client.login(ByeSellToken);
+const ClientToken = process.env.ByeSellToken;
+client.login(ClientToken);
