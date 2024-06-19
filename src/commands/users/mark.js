@@ -61,6 +61,13 @@ module.exports = {
         });
         return;
       }
+      if (targetMember.voice.streaming) {
+        await interaction.reply({
+          content: `${targetUser.displayName} is currently streaming.`,
+          ephemeral: true,
+        });
+        return;
+      }
 
       let imagesMarked, imagesRanAway;
       try {
