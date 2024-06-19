@@ -2,7 +2,7 @@ const { REST, Routes } = require('discord.js');
 require('dotenv').config();
 const fs = require('node:fs');
 const path = require('node:path');
-const ClientToken = process.env.ByeSellToken;
+const ClientToken = process.env.BuySellToken;
 const ClientID = process.env.ByeSellId;
 const GuildID = process.env.ArabianPhunksId;
 

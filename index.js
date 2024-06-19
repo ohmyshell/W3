@@ -29,5 +29,5 @@ commandHandler(client);
 
 ready(client);
 
-const ClientToken = process.env.ByeSellToken;
+const ClientToken = process.env.BuySellToken;
 client.login(ClientToken);
