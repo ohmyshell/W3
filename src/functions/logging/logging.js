@@ -1,16 +1,50 @@
+const fs = require('fs');
+const path = require('path');
+
 module.exports = async () => {
-  var log = console.log;
-  console.log = function (a) {
-    log('[' + new Date().toLocaleString() + ']: ' + a);
+  // Helper function to format the log entry
+  const addLog = (logType, ...args) => {
+    const logEntry = `[${new Date().toLocaleString()}] [${logType.toUpperCase()}]: ${args
+      .map((arg) => (typeof arg === 'object' ? JSON.stringify(arg) : arg))
+      .join(' ')}`;
+    return logEntry;
   };
 
-  var warn = console.warn;
-  console.warn = function (a) {
-    warn('[' + new Date().toLocaleString() + ']: ' + a);
+  // Path to the log file in the same directory as this script
+  const logFilePath = path.join(__dirname, '../../logs/logs.txt');
+
+  // Function to append log entries to the file
+  const appendToFile = (logEntry) => {
+    fs.appendFile(logFilePath, logEntry + '\n', (err) => {
+      if (err) {
+        console.error('Failed to write to log file:', err);
+      }
+    });
   };
 
-  var error = console.error;
-  console.error = function (a) {
-    error('[' + new Date().toLocaleString() + ']: ' + a);
+  // Save the original console methods
+  const originalLog = console.log;
+  const originalWarn = console.warn;
+  const originalError = console.error;
+
+  // Override console.log
+  console.log = function (...args) {
+    const logEntry = addLog('log', ...args);
+    originalLog(logEntry);
+    appendToFile(logEntry);
+  };
+
+  // Override console.warn
+  console.warn = function (...args) {
+    const logEntry = addLog('warn', ...args);
+    originalWarn(logEntry);
+    appendToFile(logEntry);
+  };
+
+  // Override console.error
+  console.error = function (...args) {
+    const logEntry = addLog('error', ...args);
+    originalError(logEntry);
+    appendToFile(logEntry);
   };
 };
