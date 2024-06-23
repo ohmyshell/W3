@@ -13,6 +13,20 @@ module.exports = async () => {
   // Path to the log file in the same directory as this script
   const logFilePath = path.join(__dirname, '../../logs/logs.txt');
 
+  // Ensure log directory and file exist
+  const ensureLogFileExists = () => {
+    const dirPath = path.dirname(logFilePath);
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+    if (!fs.existsSync(logFilePath)) {
+      fs.writeFileSync(logFilePath, '', { flag: 'w' });
+    }
+  };
+
+  // Call the function to ensure that the log file and directories exist
+  ensureLogFileExists();
+
   // Function to append log entries to the file
   const appendToFile = (logEntry) => {
     fs.appendFile(logFilePath, logEntry + '\n', (err) => {
