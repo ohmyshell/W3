@@ -6,7 +6,7 @@ module.exports = {
   },
   playerStart: function (client, queue, track) {
     const embed = new EmbedBuilder()
-      .setColor('#DA7356')
+      .setColor('#00A86B')
       .setTitle(track.title)
       .setURL(track.url)
       .addFields(
